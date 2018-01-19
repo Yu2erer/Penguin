@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../theme/lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="../theme/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../theme/css/editormd.preview.css">
     <link rel="stylesheet" href="../theme/css/style.css">
     <title>{{ .Title }}</title>
 </head>
@@ -13,38 +14,29 @@
     <nav class="nav navbar-default navbar-fixed-top">
         <div class="container">
             <a href="#" class="navbar-brand"><strong>Yuerer</strong>.com</a>
-            <!-- <form action="" class="navbar-form navbar-left hidden-xs">
-                <input type="text" placeholder="搜索" class="form-control">
-                <button type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form> -->
         </div>
     </nav>
     <div class="jumbotron">
         <div class="container">
             <img src="../theme/asserts/images/avator.jpg" width="80" class="avator-logo">  
-            <ul class="jumbotron_connect">
-                {{ .Connect }}
-            </ul>
-            <h1 class="jumbotron_description" style="font-size: 20px;">{{ .Description }}</h1>
+            <h1 class="jumbotron_description" style="font-size: 20px; margin-top: 10px;">{{ .Title }}</h1>
         </div>
     </div>
-    <div class="article_container container">
+    <div class="article_container container" >
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <section>
-                    <ul class="article_list">
-                        {{ .ArticleListItem }}
-                    </ul>
+                    <article class="article_list article">
+                        <div id="layout">
+                            <div id="markDownView">
+                                <textarea id="append-test" style="display:none;">
+{{ .MdBody }}
+                                    </textarea>
+                            </div>
+                        </div>
+                    </article>
                 </section>
             </div>
-            <!-- <div class="col-md-8 col-md-offset-2">
-                <ul class="pager">
-                    <li class="previous"><a href="#">&larr; 向前一页</a></li>
-                    <li class="next"><a href="#">向后一页 &rarr;</a></li>
-                </ul>
-            </div> -->
         </div>
     </div>
     <footer id="footer">
@@ -55,5 +47,17 @@
     </footer>
     <script src="../theme/lib/jquery-3.2.1.min.js"></script>
     <script src="../theme/lib/js/bootstrap.min.js"></script>
+    <script src="../theme/lib/marked.min.js"></script>
+    <script src="../theme/lib/prettify.min.js"></script>
+    <script src="../theme/lib/editormd.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var markDownView;
+            markDownView = editormd.markdownToHTML("markDownView", {
+                htmlDecode      : "style,script,iframe",
+                taskList        : true,
+            });
+        });
+    </script>
 </body>
 </html>
