@@ -31,6 +31,9 @@ func main() {
 	case "build":
 		// 编译
 		build()
+	case "http":
+		// 运行本地服务器
+		_http()
 	case "clean":
 		// 清空 source 里的文件
 		clean()

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -56,6 +57,13 @@ func new() {
 		if err != nil {
 			panic(err)
 		}
+	}
+}
+func _http() {
+	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(publicPath))))
+	http.Handle("/theme/", http.StripPrefix("/theme/", http.FileServer(http.Dir(themePath))))
+	if err := http.ListenAndServe(":12345", nil); err != nil {
+		log.Fatalln(err)
 	}
 }
 func clean() {
