@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"flag"
 	"os"
 )
@@ -10,6 +11,7 @@ var (
 )
 
 func main() {
+	fmt.Print(pengiueStr)
 	flag.Parse()
 	args = flag.Args()
 	if len(args) == 0 || len(args) > 3 {

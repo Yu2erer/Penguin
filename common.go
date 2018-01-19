@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path"
 	"time"
@@ -29,6 +29,43 @@ tag-title: Your article tag title
 tag-color: Your article tag color - red blue yellow green
 ---`
 )
+
+var pengiueStr = `                                         __                     
+|  \                    
+______    ______   _______    ______   \$$ __    __   ______  
+/      \  /      \ |       \  /      \ |  \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\|  $$$$$$\| $$| $$  | $$|  $$$$$$\
+| $$  | $$| $$    $$| $$  | $$| $$  | $$| $$| $$  | $$| $$    $$
+| $$__/ $$| $$$$$$$$| $$  | $$| $$__| $$| $$| $$__/ $$| $$$$$$$$
+| $$    $$ \$$     \| $$  | $$ \$$    $$| $$ \$$    $$ \$$     \
+| $$$$$$$   \$$$$$$$ \$$   \$$ _\$$$$$$$ \$$  \$$$$$$   \$$$$$$$
+| $$                          |  \__| $$                        
+| $$                           \$$    $$                        
+\$$                            \$$$$$$     
+    
+`
+
+const HELP = `
+Usage:
+
+pengiue command [args...]
+
+	初始化博客文件夹
+	pengiue init
+
+	新建 markdown 文件
+	pengiue new filename
+
+	编译博客
+	pengiue build
+
+	清理博客
+	pengiue clean
+
+	打开本地服务器 [http://localhost:12345]
+	pengiue http
+
+`
 
 func createMarkDown(filename string) {
 	file := path.Join(sourcePath, filename+".md")
@@ -94,5 +131,5 @@ func checkFile() {
 	}
 }
 func printUsage() {
-	fmt.Println("Print Help")
+	fmt.Println(HELP)
 }
