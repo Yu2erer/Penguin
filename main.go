@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 )
 
@@ -24,19 +23,19 @@ func main() {
 	case "new":
 		// 新建 MarkDown
 		if len(args) != 2 {
-			fmt.Println("缺少文件名")
 			printUsage()
 			os.Exit(1)
 		}
 		name := args[1]
-		fmt.Println("生成的文件名:" + name)
 		createMarkDown(name)
-	case "compile":
+	case "build":
 		// 编译
-		compile()
+		build()
 	case "clean":
 		// 清空 source 里的文件
 		clean()
+	case "help":
+		printUsage()
 	default:
 		printUsage()
 		os.Exit(1)

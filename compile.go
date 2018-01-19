@@ -78,7 +78,7 @@ func preparetplPage() {
 	}
 	tplBlogPage = string(byte)
 }
-func compile() {
+func build() {
 	checkFile()
 	preparetplPage()
 	exampleHomePage := prepareExampleHomePage()
