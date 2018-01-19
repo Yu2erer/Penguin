@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Yuerer's Blog</title>
+    <link rel="stylesheet" href="../theme/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../theme/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../theme/css/style.css">
+    <title>{{ .Title }}</title>
 </head>
 <body>
     <nav class="nav navbar-default navbar-fixed-top">
@@ -23,14 +23,11 @@
     </nav>
     <div class="jumbotron">
         <div class="container">
-            <img src="/asserts/images/avator.jpg" width="80" class="avator-logo">  
+            <img src="../theme/asserts/images/avator.jpg" width="80" class="avator-logo">  
             <ul class="jumbotron_connect">
-                <li class="github"><a href="https://github.com"><i class="fa fa-github"></i></a></li>
-                <li class="weibo"><a href="https://weibo.com"><i class="fa fa-weibo"></i></a></li>
-
+                {{ .Connect }}
             </ul>
-            <h1 class="jumbotron_description" style="font-size: 20px;">我是钰儿儿(@Yuerer),
-                一名正在体制内修行的全栈开发者.</h1>
+            <h1 class="jumbotron_description" style="font-size: 20px;">{{ .Description }}</h1>
         </div>
     </div>
     <div class="article_container container">
@@ -44,33 +41,6 @@
                                 <samll class="publish_time">2018.01.17</samll>
                             </span>
                             <small class="tag blue">php</small>
-                        </li>
-                    </ul>
-                    <ul class="article_list">
-                        <li class="article_list_item">
-                            <span class="article_list_link">
-                                <a href="#"><h3 class="mar-t-z">推荐四个超实用的网站</h3></a>
-                                <samll class="publish_time">2018.01.17</samll>
-                            </span>
-                            <small class="tag yellow">php</small>
-                        </li>
-                    </ul>
-                    <ul class="article_list">
-                        <li class="article_list_item">
-                            <span class="article_list_link">
-                                <a href="#"><h3 class="mar-t-z">推荐四个超实用的网站</h3></a>
-                                <samll class="publish_time">2018.01.17</samll>
-                            </span>
-                            <small class="tag green">workflow</small>
-                        </li>
-                    </ul>
-                    <ul class="article_list">
-                        <li class="article_list_item">
-                            <span class="article_list_link">
-                                <a href="#"><h3 class="mar-t-z">推荐四个超实用的网站</h3></a>
-                                <samll class="publish_time">2018.01.17</samll>
-                            </span>
-                            <small class="tag black">github</small>
                         </li>
                     </ul>
                 </section>
@@ -89,7 +59,7 @@
             <p> © YUERER 2018. All rights reserved. </p>
         </div>
     </footer>
-    <script src="lib/jquery-3.2.1.min.js"></script>
-    <script src="lib/js/bootstrap.min.js"></script>
+    <script src="../theme/lib/jquery-3.2.1.min.js"></script>
+    <script src="../theme/lib/js/bootstrap.min.js"></script>
 </body>
 </html>

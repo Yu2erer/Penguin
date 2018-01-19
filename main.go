@@ -20,8 +20,9 @@ func main() {
 		// 初始化
 	case "new":
 		// 新建 MarkDown
-	case "complie":
+	case "compile":
 		// 编译
+		compile()
 	default:
 		printUsage()
 		os.Exit(1)
