@@ -1,0 +1,192 @@
+body {
+    padding-top: 50px;
+    background: #F4F5F1;
+}
+.navbar-default {
+    background: #F9F9F9;
+}
+.navbar-default input[type="text"] {
+    background: #F7F7FA;
+    border: none;
+    color: #999;
+}
+.navbar-default .navbar-form {
+    position: relative;
+}
+.navbar-default button[type="submit"] {
+    position: absolute;
+    top: 18%;
+    right: 20px;
+    background: none;
+    border: none;
+}
+.navbar-default .glyphicon {
+    color: #999;
+}
+.jumbotron {
+    text-align: center;
+    background: #F4F5F1;
+    margin-bottom: 10px;
+}
+.avator-logo {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-bottom: 10px;
+}
+.jumbotron_connect {
+    margin-top: 20px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.jumbotron_connect li {
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 8px;
+    width: 40px;
+    text-align: center;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+}
+.jumbotron_connect li a {
+    padding: .2em 0 0;
+    display: block;
+}
+.jumbotron_connect li i {
+    color: #fff;
+    position: relative;
+}
+.jumbotron_connect li.github a:hover {
+    background: #333;
+}
+.jumbotron_connect li.weibo {
+    background: #f75b5b
+}
+.jumbotron_connect li.weibo a:hover {
+    background: #f75b5b;
+}
+.jumbotron_connect li.github {
+    background: #333;
+}
+
+.jumbotron_description {
+    font-weight: 700;
+    margin: 0;
+    line-height: 1em;
+    line-height: 1.2em;
+    color: #111;
+    letter-spacing: -1px;
+}
+
+.article_list {
+    background: #fff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .5);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .5);
+}
+.article_list_link {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-preferred-size: 70%;
+    flex-basis: 70%;
+    padding: 15px;
+}
+.article_container h3.mar-t-z {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.6em;
+    color: #505b69;
+    margin: 0;
+    font-size: 21px
+}
+
+.publish_time {
+    color: #ff5c2d
+}
+.article_list_item {
+    border-bottom: 1px solid #f2f2f2;
+    color: #3c3e42;
+    line-height: 1;
+    padding: 1px 25px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    font-weight: 400
+}
+.pager li a {
+    color: #CB7677;
+}
+.tag {
+    display: inline-block;
+    padding: 0 8px;
+    color: #fff;
+    background-color: #f56857;
+    height: 24px;
+    line-height: 24px;
+    font-size: 13px;
+    text-align: center;
+    border: 1px solid #f56857;
+    padding: 0 4px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 11px;
+    border-radius: 4px;
+}
+.tag[href]:focus, .tag[href]:hover {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #555
+}
+.tag.green {
+    background-color: #67ba6d;
+    border: 1px solid #67ba6d;
+}
+.tag.blue {
+    background-color: #4e89da;
+    border: 1px solid #4e89da;
+}
+.tag.black {
+    background-color: #003;
+    border: 1px solid #003;
+}
+.tag.yellow {
+    background-color: #fce38a;
+    border: 1px solid #fce38a;
+}
+.tag.red {
+    background-color: #eb586f;
+    border: 1px solid #eb586f;
+}
+#footer {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    min-height: 100px;
+    color: #111;
+    background: #f9f9f9;
+    padding-top: 30px;
+    letter-spacing: -.2px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 11px;
+}
+#footer a {
+    color: #111;
+    font-weight: 700;
+}
+#footer p {
+    text-align: center;
+}

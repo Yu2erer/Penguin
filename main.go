@@ -22,6 +22,9 @@ func main() {
 		// 新建 MarkDown
 	case "complie":
 		// 编译
+	default:
+		printUsage()
+		os.Exit(1)
 	}
 }
 
