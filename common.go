@@ -10,11 +10,12 @@ import (
 )
 
 var (
+	homePageCounts  = 2
 	tplHomePagePath = "theme/index.html"
 	publicPath      = "public"
 	sourcePath      = "source"
 	liConnect       = "<li class=\"{{ .ConnectWay }}\"><a href=\"{{ .Address }}\"><i class=\"fa fa-{{ .ConnectWay }}\"></i></a></li>"
-	liListItem  = "<li class=\"article_list_item\"><span class=\"article_list_link\"><a href=\"#\"><h3 class=\"mar-t-z\">{{ .Title }}</h3></a><samll class=\"publish_time\">{{ .Date }}</samll></span><small class=\"tag {{ .TagColor }}\">{{ .TagTitle }}</small></li>"
+	liListItem      = "<li class=\"article_list_item\"><span class=\"article_list_link\"><a href=\"{{ .Address }}\"><h3 class=\"mar-t-z\">{{ .Title }}</h3></a><samll class=\"publish_time\">{{ .Date }}</samll></span><small class=\"tag {{ .TagColor }}\">{{ .TagTitle }}</small></li>"
 )
 
 var (

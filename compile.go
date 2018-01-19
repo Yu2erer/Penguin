@@ -7,14 +7,15 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
 type HomePage struct {
-	Title       string
-	Description string
-	Connect     template.HTML
-	ArticleListItem 	template.HTML
+	Title           string
+	Description     string
+	Connect         template.HTML
+	ArticleListItem template.HTML
 }
 type Article struct {
 	Title    string
@@ -26,6 +27,8 @@ type Article struct {
 }
 
 var tplHomePage string
+
+type Articles []Article
 
 func prepareExampleHomePage() HomePage {
 	github := "https://github.com"
@@ -51,6 +54,7 @@ func prepareHomePageArticle() template.HTML {
 	for _, article := range articlelist {
 		art := strings.Replace(liListItem, "{{ .Title }}", article.Title, 1)
 		art = strings.Replace(art, "{{ .Date }}", article.Date, 1)
+		art = strings.Replace(art, "{{ .Address }}", article.Filename+".html", 1)
 		art = strings.Replace(art, "{{ .TagTitle }}", article.TagTitle, 1)
 		art = strings.Replace(art, "{{ .TagColor }}", article.TagColor, 1)
 		listItem += template.HTML(art + "\n")
@@ -77,7 +81,7 @@ func compile() {
 }
 func articleList() []Article {
 	markdownlist := markdownList()
-	articlelist := []Article{}
+	articlelist := Articles{}
 	for _, md := range markdownlist {
 		file, _ := ioutil.ReadFile(md)
 		lines := strings.Split(string(file), "\n")
@@ -86,15 +90,16 @@ func articleList() []Article {
 		date := string(lines[2])
 		date = string([]rune(date)[6:])
 		tagtitle := string(lines[3])
-		tagtitle = string([]rune(tagtitle)[10:])
+		tagtitle = string([]rune(tagtitle)[11:])
 		tagcolor := string(lines[4])
-		tagcolor = string([]rune(tagcolor)[10:])
+		tagcolor = string([]rune(tagcolor)[11:])
 		filenameWithSuffix := path.Base(md)        //获取文件名带后缀
 		fileSuffix := path.Ext(filenameWithSuffix) //获取文件后缀
 		filename := strings.TrimSuffix(filenameWithSuffix, fileSuffix)
 		mdbody := strings.Join(lines[6:len(lines)], "\n")
 		articlelist = append(articlelist, Article{title, date, tagtitle, tagcolor, mdbody, filename})
 	}
+	sort.Sort(articlelist)
 	return articlelist
 }
 func markdownList() (markdownlist []string) {
@@ -108,4 +113,14 @@ func markdownList() (markdownlist []string) {
 		return nil
 	})
 	return markdownlist
+}
+
+func (art Articles) Len() int {
+	return len(art)
+}
+func (art Articles) Less(i, j int) bool {
+	return art[i].Date > art[j].Date
+}
+func (art Articles) Swap(i, j int) {
+	art[i], art[j] = art[j], art[i]
 }
