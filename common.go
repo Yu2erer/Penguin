@@ -10,10 +10,11 @@ import (
 )
 
 var (
-	homePageCounts  = 2
 	tplHomePagePath = "theme/index.html"
+	tplBlogPagePath = "theme/blog.html"
 	publicPath      = "public"
 	sourcePath      = "source"
+	themePath       = "theme"
 	liConnect       = "<li class=\"{{ .ConnectWay }}\"><a href=\"{{ .Address }}\"><i class=\"fa fa-{{ .ConnectWay }}\"></i></a></li>"
 	liListItem      = "<li class=\"article_list_item\"><span class=\"article_list_link\"><a href=\"{{ .Address }}\"><h3 class=\"mar-t-z\">{{ .Title }}</h3></a><samll class=\"publish_time\">{{ .Date }}</samll></span><small class=\"tag {{ .TagColor }}\">{{ .TagTitle }}</small></li>"
 )
@@ -41,7 +42,49 @@ func createMarkDown(filename string) {
 	}
 	_ = ioutil.WriteFile(file, []byte(markdown), 0666)
 }
-
+func new() {
+	_, err := os.Stat(sourcePath)
+	if os.IsNotExist(err) {
+		err = os.MkdirAll(sourcePath, os.ModePerm)
+		if err != nil {
+			panic(err)
+		}
+	}
+	_, err = os.Stat(publicPath)
+	if os.IsNotExist(err) {
+		err = os.MkdirAll(publicPath, os.ModePerm)
+		if err != nil {
+			panic(err)
+		}
+	}
+}
+func clean() {
+	dir_list, err := ioutil.ReadDir(sourcePath)
+	if err != nil {
+		fmt.Println("Source 文件夹不存在, 请先 init")
+		os.Exit(1)
+	}
+	for _, dir := range dir_list {
+		err = os.Remove(sourcePath + "/" + dir.Name())
+		if err != nil {
+			fmt.Println(dir.Name() + " 删除失败")
+		}
+	}
+}
+func checkFile() {
+	if _, err := os.Stat(themePath); os.IsNotExist(err) {
+		fmt.Println("Theme 模板文件夹丢失")
+		os.Exit(1)
+	}
+	if _, err := os.Stat(sourcePath); os.IsNotExist(err) {
+		fmt.Println("请先 init")
+		os.Exit(1)
+	}
+	if _, err := os.Stat(publicPath); os.IsNotExist(err) {
+		fmt.Println("请先 init")
+		os.Exit(1)
+	}
+}
 func printUsage() {
 	fmt.Println("Print Help")
 }

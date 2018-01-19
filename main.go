@@ -20,6 +20,7 @@ func main() {
 	switch args[0] {
 	case "init":
 		// 初始化
+		new()
 	case "new":
 		// 新建 MarkDown
 		if len(args) != 2 {
@@ -33,6 +34,9 @@ func main() {
 	case "compile":
 		// 编译
 		compile()
+	case "clean":
+		// 清空 source 里的文件
+		clean()
 	default:
 		printUsage()
 		os.Exit(1)

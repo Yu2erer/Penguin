@@ -210,28 +210,6 @@ img {
     vertical-align: middle;
 }
 
-ul, ol {
-    /*list-style: none;*/
-}
-
-.clear {
-    *zoom: 1;           /* for IE 6/7 */
-}
-
-.clear:before, .clear:after {
-    height: 0; 
-    content: "";
-    font-size: 0;
-    display: table;
-    line-height: 0;     /* for Opera */
-    visibility: hidden;
-}
-
-.clear:after {
-    clear: both;
-}
-
-
 #layout {
     text-align: left;
 }

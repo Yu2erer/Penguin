@@ -26,9 +26,14 @@ type Article struct {
 	Filename string
 }
 
-var tplHomePage string
+var (
+	tplHomePage string
+	tplBlogPage string
+)
 
 type Articles []Article
+
+var artList Articles
 
 func prepareExampleHomePage() HomePage {
 	github := "https://github.com"
@@ -50,8 +55,8 @@ func prepareExampleHomePage() HomePage {
 }
 func prepareHomePageArticle() template.HTML {
 	var listItem template.HTML
-	articlelist := articleList()
-	for _, article := range articlelist {
+	artList = articleList()
+	for _, article := range artList {
 		art := strings.Replace(liListItem, "{{ .Title }}", article.Title, 1)
 		art = strings.Replace(art, "{{ .Date }}", article.Date, 1)
 		art = strings.Replace(art, "{{ .Address }}", article.Filename+".html", 1)
@@ -61,15 +66,21 @@ func prepareHomePageArticle() template.HTML {
 	}
 	return listItem
 }
-func preparetplHomePage() {
+func preparetplPage() {
 	byte, err := ioutil.ReadFile(tplHomePagePath)
 	if err != nil {
 		log.Fatalln("文件丢失")
 	}
 	tplHomePage = string(byte)
+	byte, err = ioutil.ReadFile(tplBlogPagePath)
+	if err != nil {
+		log.Fatalln("文件丢失")
+	}
+	tplBlogPage = string(byte)
 }
 func compile() {
-	preparetplHomePage()
+	checkFile()
+	preparetplPage()
 	exampleHomePage := prepareExampleHomePage()
 	t, err := template.New("tplHomePage").Parse(tplHomePage)
 	filePath := path.Join(publicPath, "index.html")
@@ -78,6 +89,15 @@ func compile() {
 		log.Fatalln("创建文件失败")
 	}
 	t.Execute(f, exampleHomePage)
+	for _, art := range artList {
+		t, err = template.New("tplBlogPage").Parse(tplBlogPage)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		filePath = path.Join(publicPath, art.Filename+".html")
+		f, err = os.Create(filePath)
+		t.Execute(f, art)
+	}
 }
 func articleList() []Article {
 	markdownlist := markdownList()
