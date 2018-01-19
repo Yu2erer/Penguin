@@ -1,13 +1,15 @@
 package main
 
 import (
-	"os"
 	"flag"
 	"fmt"
+	"os"
 )
+
 var (
 	args []string
 )
+
 func main() {
 	flag.Parse()
 	args = flag.Args()
@@ -20,6 +22,14 @@ func main() {
 		// 初始化
 	case "new":
 		// 新建 MarkDown
+		if len(args) != 2 {
+			fmt.Println("缺少文件名")
+			printUsage()
+			os.Exit(1)
+		}
+		name := args[1]
+		fmt.Println("生成的文件名:" + name)
+		createMarkDown(name)
 	case "compile":
 		// 编译
 		compile()
@@ -27,8 +37,4 @@ func main() {
 		printUsage()
 		os.Exit(1)
 	}
-}
-
-func printUsage() {
-	fmt.Println("Print Help")
 }
