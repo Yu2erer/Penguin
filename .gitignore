@@ -6,6 +6,7 @@
 *.dylib
 source/
 public/
+config.yaml
 
 # Test binary, build with `go test -c`
 *.test
