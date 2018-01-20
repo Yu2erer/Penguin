@@ -16,6 +16,7 @@ description: 自我描述
 github: github 地址 可为空
 weibo: weibo 地址 可为空
 # Logo 与 头像 放置于 theme/asserts/images 文件目录下
+# 其中 source 为 markdown博文源文件 public 为生成的页面
 `
 
 var (
@@ -52,7 +53,7 @@ const penguinStr = `
                               |  \__| $$                        
                                \$$    $$                        
 								\$$$$$$   
-								                      
+
 `
 
 const HELP = `
