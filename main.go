@@ -34,7 +34,7 @@ func main() {
 		build()
 	case "http":
 		// 运行本地服务器
-		fmt.Print(pengiueStr)
+		fmt.Print(penguinStr)
 		fmt.Println("It works on http://localhost:12345")
 		_http()
 	case "clean":
