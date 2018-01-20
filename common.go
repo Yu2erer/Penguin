@@ -59,7 +59,7 @@ const penguinStr = `
 const HELP = `
 Usage:
 
-pengiue command [args...]
+penguin command [args...]
 
 	初始化博客文件夹
 	penguin init

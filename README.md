@@ -27,7 +27,7 @@ Penguin 是一款小巧的 Markdown 静态博客生成器 它使用 `Golang` 开
 ```text
 Usage:
 
-pengiue command [args...]
+penguin command [args...]
 
 	初始化博客文件夹
 	penguin init
