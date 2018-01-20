@@ -134,9 +134,9 @@ func _http() {
 	}
 }
 func clean() {
-	dirList, err := ioutil.ReadDir(sourcePath)
+	dirList, err := ioutil.ReadDir(publicPath)
 	if err != nil {
-		fmt.Println("Source 文件夹不存在, 请先 init")
+		fmt.Println("Public 文件夹不存在, 请先 init")
 		os.Exit(1)
 	}
 	for _, dir := range dirList {
