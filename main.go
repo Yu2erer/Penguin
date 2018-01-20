@@ -11,7 +11,6 @@ var (
 )
 
 func main() {
-	fmt.Print(pengiueStr)
 	flag.Parse()
 	args = flag.Args()
 	if len(args) == 0 || len(args) > 3 {
@@ -35,6 +34,8 @@ func main() {
 		build()
 	case "http":
 		// 运行本地服务器
+		fmt.Print(pengiueStr)
+		fmt.Println("It works on http://localhost:12345")
 		_http()
 	case "clean":
 		// 清空 source 里的文件

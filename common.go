@@ -10,7 +10,16 @@ import (
 	"time"
 )
 
+const yamlSetting = `# 站点信息
+title: 网站名称
+description: 自我描述
+github: github 地址 可为空
+weibo: weibo 地址 可为空
+# Logo 与 头像 放置于 theme/asserts/images 文件目录下
+`
+
 var (
+	confPath        = "config.yaml"
 	tplHomePagePath = "theme/index.html"
 	tplBlogPagePath = "theme/blog.html"
 	publicPath      = "public"
@@ -30,7 +39,7 @@ tag-color: Your article tag color - red blue yellow green
 ---`
 )
 
-var pengiueStr = `                                         __                     
+const pengiueStr = `                                         __                     
 |  \                    
 ______    ______   _______    ______   \$$ __    __   ______  
 /      \  /      \ |       \  /      \ |  \|  \  |  \ /      \ 
@@ -81,6 +90,25 @@ func createMarkDown(filename string) {
 	_ = ioutil.WriteFile(file, []byte(markdown), 0666)
 }
 func new() {
+	createDir()
+	createConf()
+}
+
+func createConf() {
+	_, err := os.Stat(confPath)
+	if os.IsNotExist(err) {
+		_, err := os.OpenFile(confPath, os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			panic(err)
+		}
+		var confWrite = []byte(yamlSetting)
+		err = ioutil.WriteFile(confPath, confWrite, 0666)
+		if err != nil {
+			panic(err)
+		}
+	}
+}
+func createDir() {
 	_, err := os.Stat(sourcePath)
 	if os.IsNotExist(err) {
 		err = os.MkdirAll(sourcePath, os.ModePerm)
@@ -104,12 +132,12 @@ func _http() {
 	}
 }
 func clean() {
-	dir_list, err := ioutil.ReadDir(sourcePath)
+	dirList, err := ioutil.ReadDir(sourcePath)
 	if err != nil {
 		fmt.Println("Source 文件夹不存在, 请先 init")
 		os.Exit(1)
 	}
-	for _, dir := range dir_list {
+	for _, dir := range dirList {
 		err = os.Remove(sourcePath + "/" + dir.Name())
 		if err != nil {
 			fmt.Println(dir.Name() + " 删除失败")
@@ -117,6 +145,10 @@ func clean() {
 	}
 }
 func checkFile() {
+	if _, err := os.Stat(confPath); os.IsNotExist(err) {
+		fmt.Println("config.yaml 配置文件丢失")
+		os.Exit(1)
+	}
 	if _, err := os.Stat(themePath); os.IsNotExist(err) {
 		fmt.Println("Theme 模板文件夹丢失")
 		os.Exit(1)

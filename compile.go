@@ -9,11 +9,14 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"gopkg.in/yaml.v2"
 )
 
 type HomePage struct {
-	Title           string
-	Description     string
+	Title           string `yaml:"title"`
+	Description     string `yaml:"description"`
+	Github          string `yaml:"github"`
+	Weibo           string `yaml:"weibo"`
 	Connect         template.HTML
 	ArticleListItem template.HTML
 }
@@ -35,9 +38,22 @@ type Articles []Article
 
 var artList Articles
 
-func prepareExampleHomePage() HomePage {
-	github := "https://github.com"
-	weibo := "https://weibo.com"
+func (conf *HomePage) getConf() *HomePage {
+	yamlFile, err := ioutil.ReadFile(confPath)
+	if err != nil {
+		log.Println("config.yaml 模板文件丢失")
+	}
+	err = yaml.Unmarshal(yamlFile, conf)
+	if err != nil {
+		log.Fatalln("config.yaml 模板文件解析错误 err: %v", err)
+	}
+	return conf
+}
+func prepareHomePage() HomePage {
+	var hp HomePage
+	hp.getConf()
+	github := hp.Github
+	weibo := hp.Weibo
 	connectWays := map[string]string{
 		"github": github,
 		"weibo":  weibo,
@@ -51,7 +67,7 @@ func prepareExampleHomePage() HomePage {
 		}
 	}
 	ArticleListItem := prepareHomePageArticle()
-	return HomePage{"我的博客Title", "我的博客描述", connect, ArticleListItem}
+	return HomePage{hp.Title, hp.Description, github, weibo, connect, ArticleListItem}
 }
 func prepareHomePageArticle() template.HTML {
 	var listItem template.HTML
@@ -69,26 +85,26 @@ func prepareHomePageArticle() template.HTML {
 func preparetplPage() {
 	byte, err := ioutil.ReadFile(tplHomePagePath)
 	if err != nil {
-		log.Fatalln("文件丢失")
+		log.Fatalln("Theme 文件缺失")
 	}
 	tplHomePage = string(byte)
 	byte, err = ioutil.ReadFile(tplBlogPagePath)
 	if err != nil {
-		log.Fatalln("文件丢失")
+		log.Fatalln("Theme 文件缺失")
 	}
 	tplBlogPage = string(byte)
 }
 func build() {
 	checkFile()
 	preparetplPage()
-	exampleHomePage := prepareExampleHomePage()
+	homePage := prepareHomePage()
 	t, err := template.New("tplHomePage").Parse(tplHomePage)
 	filePath := path.Join(publicPath, "index.html")
 	f, err := os.Create(filePath)
 	if err != nil {
 		log.Fatalln("创建文件失败")
 	}
-	t.Execute(f, exampleHomePage)
+	t.Execute(f, homePage)
 	for _, art := range artList {
 		t, err = template.New("tplBlogPage").Parse(tplBlogPage)
 		if err != nil {
